@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import {Alert} from './alert';
 
 export class Name extends React.Component {
     state = {
         name: '',
-        isLoading: false
+        isLoading: false, 
+        hasError: false
     }
 
     async componentDidMount(){
@@ -14,7 +16,7 @@ export class Name extends React.Component {
             
             this.setState({ name: response.data.username, isLoading: false})
         } catch (error) {
-            return
+            this.setState({ isLoading: false, hasError: true})
         }
     }
 
@@ -25,9 +27,11 @@ export class Name extends React.Component {
     }
 
     render(){
-        const {name, isLoading} = this.state;
+        const {name, isLoading, hasError} = this.state;
 
         if(isLoading) return <div><h1>Loading...</h1></div>
+
+        if(hasError) return <Alert/>
 
         return (<div>
             <h1>{name}</h1>
