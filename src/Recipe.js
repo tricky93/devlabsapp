@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import './App.css';
 import {Alert} from './alert';
+import {Ingredients} from './ingredients';
 
-export class Name extends React.Component {
+export class Recipe extends React.Component {
     state = {
-        name: '',
+        recipes: [],
         isLoading: false, 
         hasError: false
     }
@@ -14,7 +16,7 @@ export class Name extends React.Component {
         try {
             const response = await axios.get('/random');
             
-            this.setState({ name: response.data.username, isLoading: false})
+            this.setState({ recipes: response.data.recipes, isLoading: false})
         } catch (error) {
             this.setState({ isLoading: false, hasError: true})
         }
@@ -27,14 +29,20 @@ export class Name extends React.Component {
     }
 
     render(){
-        const {name, isLoading, hasError} = this.state;
+        const {recipes, isLoading, hasError} = this.state;
 
         if(isLoading) return <div><h1>Loading...</h1></div>
 
         if(hasError) return <Alert/>
 
-        return (<div>
-            <h1>{name}</h1>
+        return (
+        <div className='recipe-cards'>
+            {recipes.map((recipe, i) =>(
+                <div key={i} className='card'>
+                <h4>{recipe.recipe}</h4>
+                <Ingredients ingredientsList={recipe.ingredients}/>
+                </div>
+            ))}   
         </div>)
     }
 }

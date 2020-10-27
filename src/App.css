@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.recipe-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 32px 0px;
+}
+
+.card {
+  border: 1px solid black;
+  background-color: #61dafb;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
