@@ -47,6 +47,7 @@
 .card {
   border: 1px solid black;
   background-color: #61dafb;
+  padding: 24px;
   font-size: 10px;
   display: flex;
   flex-direction: column;
